@@ -1,0 +1,110 @@
+{>"layout" /}
+
+{<body}
+<button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#formModal">
+Add Recipe
+</button>
+<br/>
+    {#recipes}
+        <div>
+            <h4  class="well" >{name} 
+                <button class="btn btn-default pull-right" data-toggle="collapse" href="#recipes_{id}" aria-expanded="false" aria-controls="#recipes_{id}">
+                    <span class="glyphicon glyphicon-triangle-bottom" arial-hidden="true"></span>
+                </button><br/><br/>
+                <div class="collapse" id="recipes_{id}">
+                    <br/>
+                    <br/>
+                    <p><strong>Ingredients: </strong><br>{ingredient}</p>
+                    <p><strong>Directions: </strong><br>{directions}</p>
+                    <br/>
+                    <hr/>
+                    <button class="btn btn-default edit-recipe" 
+                    data-toggle="modal" 
+                    data-target="#editFormModal"
+                    data-id="{id}"
+                    data-name="{name}"
+                    data-ingredient="{ingredient}"
+                    data-directions="{directions}"
+                    >
+                        <span class="glyphicon glyphicon-edit"> </span>
+                    </button>
+                    <button class="btn btn-danger delete-recipe" style="margin-left: 3px;">
+                        <span class="glyphicon glyphicon-remove" arial-hidden="true"></span>
+                    </button>
+                </div>
+            </h4>   
+        <div>
+    {/recipes}
+
+
+    <!--ADD FORM Modal -->
+    <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <form method="post" action="/add">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Recipe</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Recipe Name</label>
+                    <textArea class="form-control" name="name"></textArea>
+                </div>
+                <div class="form-group">
+                    <label>Ingredients</label>
+                    <textArea class="form-control" name="ingredient"></textArea>
+                </div>
+                <div class="form-group">
+                    <label>Directions</label>
+                    <textArea class="form-control" name="directions"></textArea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <input type="submit" class="btn btn-primary" value="Save"/>
+            </div>
+        </form>
+        </div>
+    </div>
+    </div>
+
+
+    <!-- EDIT FORM MODAL-->
+    <div class="modal fade" id="editFormModal" tabindex="-1" role="dialog" aria-labelledby="editFormModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <form method="post" action="/edit">
+        <input type="hidden" id="edit-form-id" name="id"/>
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Recipe</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Recipe Name</label>
+                    <input type="text" class="form-control" name="name" id="edit-form-name"/>
+                </div>
+                <div class="form-group">
+                    <label>Ingredients</label>
+                    <textArea class="form-control" name="ingredient" id="edit-form-ingredient"></textArea>
+                </div>
+                <div class="form-group">
+                    <label>Directions</label>
+                    <textArea class="form-control" name="directions" id="edit-form-directions"></textArea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <input type="submit" class="btn btn-primary" value="Save"/>
+            </div>
+        </form>
+        </div>
+    </div>
+    </div>
+
+{/body} 
